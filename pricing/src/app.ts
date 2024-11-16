@@ -1,18 +1,23 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express } from "express";
 
 import bodyParser from "body-parser";
 import { AppDataSource } from "./database/datasource";
+import { router } from "./controllers/router";
 
 const app: Express = express();
 const port = 3000;
 
-AppDataSource.initialize();
+async function initApp() {
+  const isTesting = process.env.NODE_ENV === "test";
+  if (!isTesting) {
+    await AppDataSource.initialize();
+  }
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use("", router);
+  app.listen(port, () => {});
+}
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
-app.listen(port, () => {});
+initApp();
 
 export default app;

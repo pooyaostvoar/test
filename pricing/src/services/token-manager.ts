@@ -12,13 +12,14 @@ class TokenManager {
   async fetchAndStoreTokens(): Promise<Token[]> {
     try {
       const tokens = await this.adapter.getAllTokens();
-      const tokenRepository = AppDataSource.getRepository(Token);
       const batchSize = 100;
       const savedTokens: Token[] = [];
 
       for (let i = 0; i < tokens.length; i += batchSize) {
         const tokenBatch = tokens.slice(i, i + batchSize);
-        const savedBatch = await tokenRepository.save(tokenBatch);
+        const savedBatch = await AppDataSource.getRepository(Token).save(
+          tokenBatch
+        );
         savedTokens.push(...savedBatch);
       }
 

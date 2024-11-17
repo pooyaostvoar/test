@@ -17,7 +17,6 @@ services:
 
   pricing:
     build: ./pricing/
-    command: npm run start
     ports:
       - "3000:3000"
     depends_on:
@@ -28,5 +27,15 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     restart: always
   
+  pricing-task:
+    build: ./pricing/
+    depends_on:
+      - db
+    entrypoint: ["npm", "run", "start:tasks"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}       
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: always
+
 volumes:
   db_data: 

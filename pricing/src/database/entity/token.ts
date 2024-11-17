@@ -6,10 +6,10 @@ export class Token extends BaseEntity {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @Column({ type: "varchar", length: 50 })
+  @Column({ type: "varchar", length: 200 })
   name: string;
 
-  @Column({ type: "varchar", length: 50 })
+  @Column({ type: "varchar", length: 200 })
   externalId: string;
 
   @Column({ type: "decimal", precision: 20, scale: 10, nullable: true })

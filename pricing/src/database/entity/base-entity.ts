@@ -2,9 +2,9 @@ import { Column, Entity } from "typeorm";
 
 @Entity()
 export class BaseEntity {
-  @Column({ type: "datetime" })
+  @Column({ type: "timestamptz" })
   createdAt: Date;
 
-  @Column({ type: "datetime" })
+  @Column({ type: "timestamptz" })
   updatedAt: Date;
 }

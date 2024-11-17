@@ -4,7 +4,7 @@ import { BaseEntity } from "./base-entity";
 @Entity()
 export class Token extends BaseEntity {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column({ type: "varchar", length: 50 })
   name: string;
@@ -12,6 +12,6 @@ export class Token extends BaseEntity {
   @Column({ type: "varchar", length: 50 })
   externalId: string;
 
-  @Column({ type: "decimal", precision: 10, scale: 4 })
-  currentPrice: number;
+  @Column({ type: "decimal", precision: 10, scale: 4, nullable: true })
+  currentPrice: number | null;
 }

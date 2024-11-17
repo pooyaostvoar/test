@@ -31,7 +31,7 @@ export const mockTokenPrices: { [keys: string]: number | undefined } = {
   "0vix-protocol": undefined,
   "0x": 0.37775,
   "0x0-ai-ai-smart-contract": 0.133556,
-  "0x678-landwolf-1933": 1.57425e-7,
+  "0x678-landwolf-1933": 1.57425,
   "0xadventure": 0.00000122,
 };
 

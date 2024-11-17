@@ -51,6 +51,31 @@ class CoinGeckoAdapter implements TokenPriceAdapter {
       updatedAt: new Date(),
     }));
   }
+
+  async getPricesByIds(
+    ids: string[]
+  ): Promise<{ [id: string]: number | undefined }> {
+    if (!ids.length) {
+      return {};
+    }
+
+    const params = {
+      ids: ids.join(","),
+      vs_currencies: "usd",
+    };
+
+    const data = await this.fetchFromAPI<Record<string, { usd: number }>>(
+      "/simple/price",
+      params
+    );
+
+    const prices: { [id: string]: number } = {};
+    for (const id of Object.keys(data)) {
+      prices[id] = data[id].usd;
+    }
+
+    return prices;
+  }
 }
 
 export default CoinGeckoAdapter;

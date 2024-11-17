@@ -12,6 +12,6 @@ export class Token extends BaseEntity {
   @Column({ type: "varchar", length: 50 })
   externalId: string;
 
-  @Column({ type: "decimal", precision: 10, scale: 4, nullable: true })
+  @Column({ type: "decimal", precision: 20, scale: 10, nullable: true })
   currentPrice: number | null;
 }

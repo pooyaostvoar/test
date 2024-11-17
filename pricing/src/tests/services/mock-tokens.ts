@@ -1,7 +1,7 @@
 import CoinGeckoAdapter from "../../adapters/coin-gecko";
 import { Token } from "../../database/entity/token";
 
-const mockTokenData = [
+export const mockTokenData = [
   { id: "01coin", symbol: "zoc", name: "01coin" },
   { id: "0chain", symbol: "zcn", name: "Zus" },
   { id: "0dog", symbol: "0dog", name: "Bitcoin Dogs" },
@@ -22,6 +22,19 @@ const mockTokenData = [
   { id: "0xadventure", symbol: "zad", name: "0xAdventure" },
 ];
 
+export const mockTokenPrices: { [keys: string]: number | undefined } = {
+  "01coin": 0.00019298,
+  "0chain": 0.03669887,
+  "0dog": 0.00419346,
+  "0-knowledge-network": 0.0002829,
+  "0-mee": 0.00003373,
+  "0vix-protocol": undefined,
+  "0x": 0.37775,
+  "0x0-ai-ai-smart-contract": 0.133556,
+  "0x678-landwolf-1933": 1.57425e-7,
+  "0xadventure": 0.00000122,
+};
+
 export class MockCoinGeckoAdapter extends CoinGeckoAdapter {
   async getAllTokens(): Promise<Token[]> {
     return mockTokenData.map((coin) => ({
@@ -31,5 +44,13 @@ export class MockCoinGeckoAdapter extends CoinGeckoAdapter {
       createdAt: new Date(),
       updatedAt: new Date(),
     }));
+  }
+
+  async getPricesByIds(
+    ids: string[]
+  ): Promise<Record<string, number | undefined>> {
+    return new Promise((resolve) => {
+      resolve(mockTokenPrices);
+    });
   }
 }
